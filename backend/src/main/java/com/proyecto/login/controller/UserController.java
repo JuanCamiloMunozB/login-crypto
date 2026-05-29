@@ -23,6 +23,6 @@ public class UserController {
     @PutMapping("/me/password")
     public void changePassword(Authentication auth,
                                @RequestBody @Valid ChangePasswordRequest request) {
-        userService.changePassword(auth.getName(), request.newPassword().toCharArray());
+        userService.changePassword(auth.getName(), request.newPassword());
     }
 }

@@ -1,5 +1,6 @@
 package com.proyecto.login.config;
 
+import com.proyecto.login.crypto.HashedPassword;
 import com.proyecto.login.crypto.PasswordManager;
 import com.proyecto.login.model.Role;
 import com.proyecto.login.model.User;
@@ -23,18 +24,14 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (!userRepository.existsByRole(Role.ADMIN)) {
-            String salt = passwordManager.generateSaltBase64();
-            String hash = passwordManager.hashPassword(
-                    adminPassword.toCharArray(), salt, PasswordManager.ITERATIONS);
+            HashedPassword credential = passwordManager.hash(adminPassword.toCharArray());
 
             User admin = User.builder()
                     .username(adminUsername)
-                    .salt(salt)
-                    .passwordHash(hash)
-                    .iterations(PasswordManager.ITERATIONS)
                     .role(Role.ADMIN)
-                    .requiresPasswordChange(true)
                     .build();
+            admin.assignCredentials(credential.hash(), credential.salt(), credential.iterations());
+            admin.setRequiresPasswordChange(true); // force rotation of the seeded default password
 
             userRepository.save(admin);
             System.out.println(">> Initial admin account created: " + adminUsername);

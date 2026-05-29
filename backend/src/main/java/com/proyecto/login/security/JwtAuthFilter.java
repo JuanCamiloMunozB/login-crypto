@@ -1,5 +1,6 @@
 package com.proyecto.login.security;
 
+import com.proyecto.login.model.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -34,18 +35,32 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             try {
-                Claims claims = jwtService.validate(token);
-                String username = claims.getSubject();
-                String role = claims.get("role", String.class);
-
-                var auth = new UsernamePasswordAuthenticationToken(
-                        username, null,
-                        List.of(new SimpleGrantedAuthority("ROLE_" + role)));
-                SecurityContextHolder.getContext().setAuthentication(auth);
-            } catch (JwtException ignored) {
-                // Invalid or expired token — request continues unauthenticated.
+                authenticate(jwtService.validate(token));
+            } catch (JwtException | IllegalArgumentException ex) {
+                // Invalid/expired token or unknown role claim: leave the request
+                // unauthenticated so URL-based authorization rejects it with 401/403.
+                // Logged at debug only — the reason is never leaked to the client.
+                logger.debug("Rejected JWT: " + ex.getMessage());
             }
         }
         chain.doFilter(req, res);
+    }
+
+    /** Builds the authentication from validated claims. No-ops if claims are incomplete. */
+    private void authenticate(Claims claims) {
+        String username = claims.getSubject();
+        String roleClaim = claims.get("role", String.class);
+        if (username == null || roleClaim == null) {
+            return;
+        }
+
+        // Validate the role against the enum (single source of truth);
+        // an unknown value throws IllegalArgumentException and is rejected above.
+        Role role = Role.valueOf(roleClaim);
+
+        var auth = new UsernamePasswordAuthenticationToken(
+                username, null,
+                List.of(new SimpleGrantedAuthority(role.authority())));
+        SecurityContextHolder.getContext().setAuthentication(auth);
     }
 }

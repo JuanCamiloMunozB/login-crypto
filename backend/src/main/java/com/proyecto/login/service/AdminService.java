@@ -39,9 +39,7 @@ public class AdminService {
         if (user.getRole() == Role.ADMIN) {
             throw new IllegalStateException("Cannot clear the admin password");
         }
-        user.setPasswordHash(null);
-        user.setSalt(null);
-        user.setRequiresPasswordChange(true);
+        user.clearCredentials();
         userRepository.save(user);
     }
 }

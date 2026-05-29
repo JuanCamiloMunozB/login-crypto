@@ -1,0 +1,469 @@
+{
+  "info": {
+    "name": "Login Crypto – Backend Test Suite",
+    "description": "29 requests covering public self-registration, authentication, admin management, user self-service, and password lifecycle. Requires the backend running on port 8081.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl",       "value": "http://localhost:8081" },
+    { "key": "adminToken",    "value": "" },
+    { "key": "userToken",     "value": "" },
+    { "key": "testUser",      "value": "alice" },
+    { "key": "testPass",      "value": "Test12345" },
+    { "key": "newPass",       "value": "Changed99" }
+  ],
+  "item": [
+    {
+      "name": "1 – Setup",
+      "item": [
+        {
+          "name": "01 Admin login → save adminToken",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const b = pm.response.json();",
+            "pm.test('JWT token present',   () => pm.expect(b.token).to.be.a('string').and.not.empty);",
+            "pm.test('Username is admin',   () => pm.expect(b.username).to.eql('admin'));",
+            "pm.test('Role is ADMIN',       () => pm.expect(b.role).to.eql('ADMIN'));",
+            "pm.collectionVariables.set('adminToken', b.token);"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"admin\",\"password\":\"Admin12345\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        },
+        {
+          "name": "02 Self-register test user alice (PUBLIC → 201)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 201 Created', () => pm.response.to.have.status(201));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"{{testUser}}\",\"password\":\"{{testPass}}\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/register",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","register"] }
+          }
+        },
+        {
+          "name": "03 Alice login → save userToken",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const b = pm.response.json();",
+            "pm.test('JWT token present', () => pm.expect(b.token).to.be.a('string').and.not.empty);",
+            "pm.test('Role is USER',      () => pm.expect(b.role).to.eql('USER'));",
+            "pm.collectionVariables.set('userToken', b.token);"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"{{testUser}}\",\"password\":\"{{testPass}}\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "2 – Public Registration",
+      "item": [
+        {
+          "name": "04 Register – duplicate username → 409",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 409 Conflict', () => pm.response.to.have.status(409));",
+            "pm.test('Error mentions username taken', () => {",
+            "  pm.expect(pm.response.json().error.toLowerCase()).to.include('taken');",
+            "});"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"{{testUser}}\",\"password\":\"Test12345\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/register",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","register"] }
+          }
+        },
+        {
+          "name": "05 Register – no uppercase → 400 (policy)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));",
+            "pm.test('Policy error returned', () => pm.expect(pm.response.json().error).to.be.a('string'));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"weakuser\",\"password\":\"nouppercase1\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/register",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","register"] }
+          }
+        },
+        {
+          "name": "06 Register – password too short → 400 (policy)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));",
+            "pm.test('Mentions 8 characters', () => {",
+            "  pm.expect(pm.response.json().error).to.include('8 characters');",
+            "});"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"shortpwd\",\"password\":\"Ab1\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/register",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","register"] }
+          }
+        },
+        {
+          "name": "07 Register – blank username → 400 (validation)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"\",\"password\":\"Valid12345\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/register",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","register"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "3 – Authentication",
+      "item": [
+        {
+          "name": "08 Login – wrong password → 401",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 401', () => pm.response.to.have.status(401));",
+            "pm.test('Error field present', () => pm.expect(pm.response.json().error).to.be.a('string'));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"admin\",\"password\":\"WrongPass1\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        },
+        {
+          "name": "09 Login – non-existent user → 401",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 401', () => pm.response.to.have.status(401));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"ghost\",\"password\":\"Ghost12345\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        },
+        {
+          "name": "10 Login – blank username → 400",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"\",\"password\":\"Admin12345\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        },
+        {
+          "name": "11 Login – blank password → 400",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"admin\",\"password\":\"\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "4 – Admin Endpoints",
+      "item": [
+        {
+          "name": "12 List users (ADMIN token) → 200 + both users",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const list = pm.response.json();",
+            "pm.test('Response is array',    () => pm.expect(list).to.be.an('array'));",
+            "pm.test('Contains admin',       () => pm.expect(list).to.include('admin'));",
+            "pm.test('Contains alice',       () => pm.expect(list).to.include('alice'));"
+          ]}}],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/admin/users",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users"] }
+          }
+        },
+        {
+          "name": "13 List users – no token → 401/403",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Unauthorized or Forbidden', () => {",
+            "  pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
+            "});"
+          ]}}],
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/admin/users",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users"] }
+          }
+        },
+        {
+          "name": "14 List users – USER token → 403 (insufficient role)",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 403 Forbidden', () => pm.response.to.have.status(403));"
+          ]}}],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/admin/users",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users"] }
+          }
+        },
+        {
+          "name": "15 Delete admin (self-protection) → 400",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));",
+            "pm.test('Error protects admin account', () => {",
+            "  pm.expect(pm.response.json().error.toLowerCase()).to.include('admin');",
+            "});"
+          ]}}],
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/admin/users/admin",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users","admin"] }
+          }
+        },
+        {
+          "name": "16 Delete non-existent user → 400",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));",
+            "pm.test('User not found message', () => {",
+            "  pm.expect(pm.response.json().error.toLowerCase()).to.include('not found');",
+            "});"
+          ]}}],
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/admin/users/ghost_xyz",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users","ghost_xyz"] }
+          }
+        },
+        {
+          "name": "17 Clear admin's own password (protected) → 400",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));",
+            "pm.test('Error protects admin', () => {",
+            "  pm.expect(pm.response.json().error.toLowerCase()).to.include('admin');",
+            "});"
+          ]}}],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/admin/users/admin/clear-password",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users","admin","clear-password"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "5 – User Self-Service",
+      "item": [
+        {
+          "name": "18 Get last login (USER token) → 200",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "pm.test('lastLogin field present', () => {",
+            "  pm.expect(pm.response.json()).to.have.property('lastLogin');",
+            "});"
+          ]}}],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/user/me/last-login",
+                     "host": ["{{baseUrl}}"], "path": ["api","user","me","last-login"] }
+          }
+        },
+        {
+          "name": "19 Get last login – no token → 401/403",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Unauthorized or Forbidden', () => {",
+            "  pm.expect(pm.response.code).to.be.oneOf([401, 403]);",
+            "});"
+          ]}}],
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/user/me/last-login",
+                     "host": ["{{baseUrl}}"], "path": ["api","user","me","last-login"] }
+          }
+        },
+        {
+          "name": "20 Get last login – ADMIN token (wrong role) → 403",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 403 Forbidden', () => pm.response.to.have.status(403));"
+          ]}}],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/user/me/last-login",
+                     "host": ["{{baseUrl}}"], "path": ["api","user","me","last-login"] }
+          }
+        },
+        {
+          "name": "21 Change password – too short → 400",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));",
+            "pm.test('Mentions 8 characters', () => {",
+            "  pm.expect(pm.response.json().error).to.include('8 characters');",
+            "});"
+          ]}}],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"newPassword\":\"Ab1\"}" },
+            "url": { "raw": "{{baseUrl}}/api/user/me/password",
+                     "host": ["{{baseUrl}}"], "path": ["api","user","me","password"] }
+          }
+        },
+        {
+          "name": "22 Change password – no digit → 400",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 400', () => pm.response.to.have.status(400));",
+            "pm.test('Policy error returned', () => pm.expect(pm.response.json().error).to.be.a('string'));"
+          ]}}],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"newPassword\":\"NoDigitPass\"}" },
+            "url": { "raw": "{{baseUrl}}/api/user/me/password",
+                     "host": ["{{baseUrl}}"], "path": ["api","user","me","password"] }
+          }
+        },
+        {
+          "name": "23 Change password – valid → 200",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));"
+          ]}}],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"newPassword\":\"{{newPass}}\"}" },
+            "url": { "raw": "{{baseUrl}}/api/user/me/password",
+                     "host": ["{{baseUrl}}"], "path": ["api","user","me","password"] }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "6 – Password Lifecycle",
+      "item": [
+        {
+          "name": "24 Login alice with OLD password (now rejected) → 401",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 401 – old password rejected after change', () => pm.response.to.have.status(401));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"alice\",\"password\":\"Test12345\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        },
+        {
+          "name": "25 Login alice with NEW password → 200",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200 – new password accepted', () => pm.response.to.have.status(200));",
+            "pm.test('Role still USER', () => pm.expect(pm.response.json().role).to.eql('USER'));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"alice\",\"password\":\"Changed99\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        },
+        {
+          "name": "26 Admin clears alice's password → 200",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));"
+          ]}}],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/admin/users/alice/clear-password",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users","alice","clear-password"] }
+          }
+        },
+        {
+          "name": "27 Alice login after password cleared → 401",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 401 – account requires new password', () => pm.response.to.have.status(401));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"username\":\"alice\",\"password\":\"Changed99\"}" },
+            "url": { "raw": "{{baseUrl}}/api/auth/login",
+                     "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+          }
+        },
+        {
+          "name": "28 Admin deletes alice → 200",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));"
+          ]}}],
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/admin/users/alice",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users","alice"] }
+          }
+        },
+        {
+          "name": "29 Verify alice removed from user list",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const list = pm.response.json();",
+            "pm.test('Alice is gone',       () => pm.expect(list).to.not.include('alice'));",
+            "pm.test('Admin still present', () => pm.expect(list).to.include('admin'));"
+          ]}}],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": { "raw": "{{baseUrl}}/api/admin/users",
+                     "host": ["{{baseUrl}}"], "path": ["api","admin","users"] }
+          }
+        }
+      ]
+    }
+  ]
+}

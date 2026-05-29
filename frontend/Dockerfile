@@ -16,8 +16,11 @@ RUN npm run build
 FROM node:20-alpine AS run
 WORKDIR /app
 ENV NODE_ENV=production
-COPY --from=build /app/.next/standalone ./
-COPY --from=build /app/.next/static ./.next/static
-COPY --from=build /app/public ./public
+# Copy build artifacts owned by the unprivileged "node" user that ships with the image.
+COPY --from=build --chown=node:node /app/.next/standalone ./
+COPY --from=build --chown=node:node /app/.next/static ./.next/static
+COPY --from=build --chown=node:node /app/public ./public
+# Run as non-root (least privilege).
+USER node
 EXPOSE 3000
 CMD ["node", "server.js"]

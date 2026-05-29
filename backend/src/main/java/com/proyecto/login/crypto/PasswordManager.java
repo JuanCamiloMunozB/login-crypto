@@ -32,6 +32,17 @@ public class PasswordManager {
     }
 
     /**
+     * Generates a fresh salt and derives the hash using the current work factor.
+     * Single entry point for creating a credential so callers never duplicate the
+     * salt-generation / iteration-count logic.
+     */
+    public HashedPassword hash(char[] password) {
+        String salt = generateSaltBase64();
+        String hash = hashPassword(password, salt, ITERATIONS);
+        return new HashedPassword(hash, salt, ITERATIONS);
+    }
+
+    /**
      * Derives the password hash using PBKDF2.
      * Uses char[] instead of String so the password can be zeroed from memory after use.
      */

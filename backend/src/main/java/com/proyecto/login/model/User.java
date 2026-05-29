@@ -44,4 +44,23 @@ public class User {
     /** When true the account must set a new password before normal access. */
     @Builder.Default
     private boolean requiresPasswordChange = false;
+
+    /**
+     * Assigns a freshly derived credential and clears the password-change requirement.
+     * Keeps credential mutation in the domain model and out of the service/crypto layers.
+     */
+    public void assignCredentials(String passwordHash, String salt, Integer iterations) {
+        this.passwordHash = passwordHash;
+        this.salt = salt;
+        this.iterations = iterations;
+        this.requiresPasswordChange = false;
+    }
+
+    /** Removes the stored credential, forcing the account to set a new password. */
+    public void clearCredentials() {
+        this.passwordHash = null;
+        this.salt = null;
+        this.iterations = null;
+        this.requiresPasswordChange = true;
+    }
 }

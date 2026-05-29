@@ -1,5 +1,6 @@
 package com.proyecto.login.config;
 
+import com.proyecto.login.model.Role;
 import com.proyecto.login.security.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -31,8 +32,8 @@ public class SecurityConfig {
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/user/**").hasRole("USER")
+                .requestMatchers("/api/admin/**").hasRole(Role.ADMIN.name())
+                .requestMatchers("/api/user/**").hasRole(Role.USER.name())
                 .anyRequest().authenticated())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
