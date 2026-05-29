@@ -1,0 +1,7 @@
+# Secrets / local environment — never commit
+.env
+.env.local
+*.env
+
+# Keep the template
+!.env.example
