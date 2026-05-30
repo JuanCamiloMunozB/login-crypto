@@ -1,0 +1,4 @@
+2026.05.29 19:56:44 INFO  Started: Metals version 1.6.7 in folders 'C:\Users\chamo\Documents\login-crypto' for client Visual Studio Code 1.121.0.
+2026.05.29 19:56:44 INFO  Memory monitor started
+2026.05.29 19:56:46 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026.05.29 19:56:47 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordManager.java. Using fallback presentation compiler.
