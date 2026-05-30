@@ -1,3 +1,22 @@
+/**
+ * admin/page.tsx — Administration panel (role ADMIN)
+ *
+ * Admin-exclusive features:
+ *   1. List all registered users      (GET    /api/admin/users)
+ *   2. Delete a user account          (DELETE /api/admin/users/{username})
+ *      The backend prevents deleting the admin account itself.
+ *   3. Clear a user's credentials     (PUT    /api/admin/users/{username}/clear-password)
+ *      Sets passwordHash, salt and iterations to NULL in the database,
+ *      locking the user out until their account is managed by the admin.
+ *
+ * User search is client-side only (useMemo) since the full list is already
+ * loaded into memory after the initial fetch.
+ *
+ * Route protection:
+ *   - No active session → redirects to /login.
+ *   - Role USER         → redirects to /dashboard.
+ */
+
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';

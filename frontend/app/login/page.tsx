@@ -1,3 +1,22 @@
+/**
+ * login/page.tsx — Login page
+ *
+ * Split-panel layout:
+ *   Left  — authentication form (username + password)
+ *   Right — decorative cybersecurity visual with CSS animations (desktop only)
+ *
+ * Authentication flow:
+ *   1. The user enters credentials and submits the form.
+ *   2. POST /api/auth/login is called on the backend.
+ *   3. On success the JWT and role are stored in localStorage (auth.ts).
+ *   4. The user is redirected based on their role:
+ *        ADMIN → /admin
+ *        USER  → /dashboard
+ *
+ * If the user already has an active session they are redirected immediately
+ * on mount via the initial useEffect check.
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';

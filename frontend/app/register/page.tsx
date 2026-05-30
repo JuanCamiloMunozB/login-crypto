@@ -1,3 +1,22 @@
+/**
+ * register/page.tsx — Public registration page
+ *
+ * Allows anyone to create a USER account.
+ * The ADMIN role cannot be created from this screen; there is exactly one
+ * admin account, seeded by the backend on first startup (DataInitializer).
+ *
+ * Client-side validation:
+ *   - Both password fields must match before the request is sent.
+ *
+ * Server-side validation (backend PasswordPolicy):
+ *   - Length between 8 and 128 characters.
+ *   - Must contain at least one uppercase letter, one lowercase letter
+ *     and one digit.
+ *
+ * On successful registration, redirects to /login?registered=1 so the
+ * login page can show a confirmation banner.
+ */
+
 'use client';
 
 import { useState } from 'react';

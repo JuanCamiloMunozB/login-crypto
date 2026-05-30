@@ -1,21 +1,41 @@
+/**
+ * globals.css — Global styles
+ *
+ * Imports Tailwind CSS v4 and defines the custom keyframe animations used
+ * by the decorative background panels on the login, register, admin and
+ * dashboard pages.
+ *
+ * Animation classes:
+ *   .animate-blob          — slow organic movement (no delay)
+ *   .animate-blob-delay-2  — same movement, 2 s delay (staggered blobs)
+ *   .animate-blob-delay-4  — same movement, 4 s delay (staggered blobs)
+ *   .animate-spin-slow     — continuous 20 s full rotation
+ *   .animate-pulse-glow    — opacity + scale pulse for the shield icon glow
+ *
+ * The three blob variants share the same keyframe but start at different
+ * points in time, creating the illusion of independent organic movement.
+ */
+
 @import "tailwindcss";
 
 body {
   font-family: var(--font-geist-sans), Arial, sans-serif;
 }
 
-/* Animated glowing blobs for the auth visual panel */
+/* Slow organic drift used for the blurred background blob elements */
 @keyframes blob {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33%       { transform: translate(28px, -45px) scale(1.12); }
   66%       { transform: translate(-18px, 22px) scale(0.92); }
 }
 
+/* Continuous rotation for the decorative ring elements */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
+/* Breathing glow effect for the central shield SVG */
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.5; transform: scale(1); }
   50%       { opacity: 1;   transform: scale(1.08); }

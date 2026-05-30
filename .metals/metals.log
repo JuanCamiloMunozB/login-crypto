@@ -2,3 +2,134 @@
 2026.05.29 19:56:44 INFO  Memory monitor started
 2026.05.29 19:56:46 WARN  Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
 2026.05.29 19:56:47 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordManager.java. Using fallback presentation compiler.
+may. 29, 2026 7:56:49 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 2
+may. 29, 2026 7:56:49 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 1
+2026.05.29 19:56:49 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordManager.java. Using fallback presentation compiler.
+2026.05.29 19:56:49 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordPolicy.java. Using fallback presentation compiler.
+may. 29, 2026 7:56:49 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 3
+2026.05.29 19:56:49 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordPolicy.java. Using fallback presentation compiler.
+may. 29, 2026 7:56:49 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 6
+may. 29, 2026 7:56:49 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7
+may. 29, 2026 7:56:49 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 5
+may. 29, 2026 7:56:49 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 4
+2026.05.29 19:56:49 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordPolicy.java. Using fallback presentation compiler.
+2026.05.29 19:56:49 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+may. 29, 2026 7:56:51 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 10
+2026.05.29 19:56:51 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 19:57:01 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 19:57:14 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 19:57:28 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:55 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:56 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:56 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:56 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:56 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:56 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:56 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+may. 29, 2026 9:03:57 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 39
+may. 29, 2026 9:03:57 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 40
+may. 29, 2026 9:03:57 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 41
+may. 29, 2026 9:03:57 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 42
+2026.05.29 21:03:57 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:57 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+may. 29, 2026 9:03:57 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 43
+may. 29, 2026 9:03:57 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 44
+2026.05.29 21:03:57 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:57 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:57 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:03:57 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+may. 29, 2026 9:03:58 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 45
+may. 29, 2026 9:03:58 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 46
+may. 29, 2026 9:03:58 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 47
+may. 29, 2026 9:03:58 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 48
+2026.05.29 21:03:58 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:04:16 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:04:16 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+may. 29, 2026 9:04:16 P. M. org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 56
+2026.05.29 21:06:29 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\BackendApplication.java. Using fallback presentation compiler.
+2026.05.29 21:06:29 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\config\SecurityConfig.java. Using fallback presentation compiler.
+2026.05.29 21:06:32 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\controller\AuthController.java. Using fallback presentation compiler.
+2026.05.29 21:06:32 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\controller\UserController.java. Using fallback presentation compiler.
+2026.05.29 21:06:32 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\controller\AdminController.java. Using fallback presentation compiler.
+2026.05.29 21:06:32 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\service\AuthService.java. Using fallback presentation compiler.
+2026.05.29 21:06:36 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\service\UserService.java. Using fallback presentation compiler.
+2026.05.29 21:06:36 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\service\AdminService.java. Using fallback presentation compiler.
+2026.05.29 21:06:36 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\model\User.java. Using fallback presentation compiler.
+2026.05.29 21:06:36 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\model\Role.java. Using fallback presentation compiler.
+2026.05.29 21:06:40 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordManager.java. Using fallback presentation compiler.
+2026.05.29 21:06:40 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordPolicy.java. Using fallback presentation compiler.
+2026.05.29 21:06:40 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\HashedPassword.java. Using fallback presentation compiler.
+2026.05.29 21:06:43 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\security\JwtService.java. Using fallback presentation compiler.
+2026.05.29 21:06:43 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\security\JwtAuthFilter.java. Using fallback presentation compiler.
+2026.05.29 21:06:43 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\repository\UserRepository.java. Using fallback presentation compiler.
+2026.05.29 21:06:43 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\exception\ApiExceptionHandler.java. Using fallback presentation compiler.
+2026.05.29 21:06:48 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\dto\LoginRequest.java. Using fallback presentation compiler.
+2026.05.29 21:06:48 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\dto\LoginResponse.java. Using fallback presentation compiler.
+2026.05.29 21:06:48 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\dto\RegisterRequest.java. Using fallback presentation compiler.
+2026.05.29 21:06:51 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\dto\ChangePasswordRequest.java. Using fallback presentation compiler.
+2026.05.29 21:06:51 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\dto\LastLoginResponse.java. Using fallback presentation compiler.
+2026.05.29 21:06:51 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\config\DataInitializer.java. Using fallback presentation compiler.
+2026.05.29 21:07:06 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\exception\ConflictException.java. Using fallback presentation compiler.
+2026.05.29 21:07:40 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:09:19 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:09:19 WARN  no build target for: C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java
+2026.05.29 21:09:19 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:09:38 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:09:38 WARN  no build target for: C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java
+2026.05.29 21:09:38 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:09:50 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\dto\LoginResponse.java. Using fallback presentation compiler.
+2026.05.29 21:09:50 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\dto\RegisterRequest.java. Using fallback presentation compiler.
+2026.05.29 21:10:00 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\controller\UserController.java. Using fallback presentation compiler.
+2026.05.29 21:10:00 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\controller\AdminController.java. Using fallback presentation compiler.
+2026.05.29 21:10:02 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:10:02 WARN  no build target for: C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java
+2026.05.29 21:10:02 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:11:34 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:11:34 WARN  no build target for: C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java
+2026.05.29 21:11:34 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:11:57 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:11:57 WARN  no build target for: C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java
+2026.05.29 21:11:57 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:12:25 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:12:25 WARN  no build target for: C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java
+2026.05.29 21:12:25 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:12:58 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:12:58 WARN  no build target for: C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java
+2026.05.29 21:12:58 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:14:11 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:14:11 WARN  no build target for: C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java
+2026.05.29 21:14:11 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:21:03 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:21:20 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\SecureChars.java. Using fallback presentation compiler.
+2026.05.29 21:54:27 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\service\AdminService.java. Using fallback presentation compiler.
+2026.05.29 21:54:27 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\service\AuthService.java. Using fallback presentation compiler.
+2026.05.29 21:56:24 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\config\DataInitializer.java. Using fallback presentation compiler.
+2026.05.29 21:56:24 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\model\User.java. Using fallback presentation compiler.
+2026.05.29 21:56:35 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\config\SecurityConfig.java. Using fallback presentation compiler.
+2026.05.29 21:56:35 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordManager.java. Using fallback presentation compiler.
+2026.05.29 21:56:53 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\model\Role.java. Using fallback presentation compiler.
+2026.05.29 22:06:11 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\crypto\PasswordPolicy.java. Using fallback presentation compiler.
+2026.05.29 22:06:11 INFO  no build target found for C:\Users\chamo\Documents\login-crypto\backend\src\main\java\com\proyecto\login\exception\ApiExceptionHandler.java. Using fallback presentation compiler.
+2026.05.29 22:40:16 INFO  Shutting down server
+2026.05.29 22:40:16 INFO  Memory monitor stopped
+2026.05.29 22:40:16 INFO  shutting down Metals
+2026.05.29 22:40:17 INFO  Exiting server

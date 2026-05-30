@@ -1,3 +1,21 @@
+/**
+ * dashboard/page.tsx — Regular user panel (role USER)
+ *
+ * Features:
+ *   1. Displays the date and time of the previous login session.
+ *      The backend keeps two timestamps per user: lastLogin (previous) and
+ *      currentLogin (current). On every successful login, currentLogin is
+ *      promoted to lastLogin so the user always sees when their last session was.
+ *
+ *   2. Allows changing the password via PUT /api/user/me/password.
+ *      Password match validation is done on the client side; the strength
+ *      policy (length, character requirements) is enforced by the backend.
+ *
+ * Route protection:
+ *   - No active session → redirects to /login.
+ *   - Role ADMIN        → redirects to /admin.
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -110,7 +128,7 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Último login */}
+        {/* Last login */}
         <div className="rounded-2xl border border-slate-700/50 p-6" style={{ background: '#0a0d20' }}>
           <div className="flex items-center gap-3 mb-4">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center"
@@ -126,7 +144,7 @@ export default function DashboardPage() {
           <p className="text-white font-medium text-base pl-12">{formatDate(lastLogin)}</p>
         </div>
 
-        {/* Cambiar contraseña */}
+        {/* Change password */}
         <div className="rounded-2xl border border-slate-700/50 p-6" style={{ background: '#0a0d20' }}>
           <div className="flex items-center gap-3 mb-6">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center"
