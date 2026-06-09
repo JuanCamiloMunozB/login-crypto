@@ -6,11 +6,11 @@ Sistema de gestión de credenciales seguro con autenticación PBKDF2 + JWT y rol
 
 Consulta el **[INFORME.md](./INFORME.md)** para una documentación completa que incluye:
 
-- ✅ Manera cómo se hizo el programa (arquitectura, tecnologías, componentes)
-- ✅ Diagramas C4 (contexto, contenedores, componentes)
-- ✅ Pantallazos de la aplicación funcionando
-- ✅ Dificultades encontradas y cómo se resolvieron
-- ✅ Conclusiones sobre seguridad y buenas prácticas
+-  Manera cómo se hizo el programa (arquitectura, tecnologías, componentes)
+-  Diagramas C4 (contexto, contenedores, componentes)
+-  Pantallazos de la aplicación funcionando
+-  Dificultades encontradas y cómo se resolvieron
+-  Conclusiones sobre seguridad y buenas prácticas
 
 ---
 
