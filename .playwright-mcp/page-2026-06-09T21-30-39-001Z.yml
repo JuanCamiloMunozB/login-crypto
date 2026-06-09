@@ -1,0 +1,72 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e36]
+  - generic [ref=e37]:
+    - banner [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - img [ref=e42]
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: admin
+            - paragraph [ref=e46]: Administrador del sistema
+        - button "Cerrar sesión" [ref=e47]:
+          - img [ref=e48]
+          - text: Cerrar sesión
+    - main [ref=e50]:
+      - generic [ref=e51]:
+        - heading "Panel de administración" [level=1] [ref=e52]
+        - paragraph [ref=e53]: Gestiona los usuarios y credenciales del sistema
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - heading "Gestión de usuarios" [level=2] [ref=e57]
+            - paragraph [ref=e58]: 1 usuario registrado
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e61]
+              - textbox "Buscar usuario..." [ref=e63]
+            - button "Actualizar" [ref=e64]:
+              - img [ref=e65]
+              - text: Actualizar
+        - generic [ref=e67]:
+          - generic [ref=e68]: Usuario
+          - generic [ref=e69]: Acciones
+        - list [ref=e70]:
+          - listitem [ref=e71]:
+            - generic [ref=e72]:
+              - generic [ref=e74]: A
+              - generic [ref=e77]:
+                - generic [ref=e78]:
+                  - generic [ref=e79]: admin
+                  - generic [ref=e80]: tú
+                - text: Administrador
+            - generic [ref=e81]: Cuenta protegida
+          - listitem [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e85]: U
+              - generic [ref=e86]:
+                - generic [ref=e88]: usuario1
+                - text: Usuario registrado
+            - generic [ref=e89]:
+              - button "Limpiar contraseña" [ref=e90]:
+                - img [ref=e91]
+                - text: Limpiar contraseña
+              - button "Eliminar" [ref=e93]:
+                - img [ref=e94]
+                - text: Eliminar
+      - generic [ref=e96]:
+        - generic [ref=e97]:
+          - img [ref=e98]
+          - generic [ref=e100]: Configuración de seguridad
+        - generic [ref=e101]:
+          - generic [ref=e102]:
+            - paragraph [ref=e103]: Algoritmo
+            - paragraph [ref=e104]: PBKDF2
+          - generic [ref=e105]:
+            - paragraph [ref=e106]: Iteraciones
+            - paragraph [ref=e107]: 210,000
+          - generic [ref=e108]:
+            - paragraph [ref=e109]: Autenticación
+            - paragraph [ref=e110]: JWT
+          - generic [ref=e111]:
+            - paragraph [ref=e112]: Salt
+            - paragraph [ref=e113]: 16 bytes

@@ -1,0 +1,23 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e36]
+  - generic [ref=e116]:
+    - generic [ref=e117]:
+      - img [ref=e119]
+      - generic [ref=e121]: SecureAuth
+    - heading "Iniciar sesión" [level=1] [ref=e122]
+    - paragraph [ref=e123]: Ingresa tus credenciales para acceder al sistema
+    - generic [ref=e124]:
+      - generic [ref=e125]:
+        - generic [ref=e126]: Usuario
+        - textbox "Nombre de usuario" [ref=e127]
+      - generic [ref=e128]:
+        - generic [ref=e129]: Contraseña
+        - generic [ref=e130]:
+          - textbox "Tu contraseña" [ref=e131]
+          - button "Mostrar contraseña" [ref=e132]:
+            - img [ref=e133]
+      - button "Ingresar al sistema" [ref=e136]
+    - paragraph [ref=e137]:
+      - text: ¿No tienes cuenta?
+      - link "Regístrate aquí" [ref=e138] [cursor=pointer]:
+        - /url: /register
