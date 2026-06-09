@@ -2,7 +2,7 @@
 
 Sistema de gestión de credenciales seguro con autenticación PBKDF2 + JWT y roles de usuario (administrador y usuario común).
 
-## 📋 Informe del proyecto
+##  Informe del proyecto
 
 Consulta el **[INFORME.md](./INFORME.md)** para una documentación completa que incluye:
 
