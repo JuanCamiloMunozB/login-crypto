@@ -33,7 +33,7 @@ Las contraseñas se almacenan en una base de datos PostgreSQL usando el algoritm
 | Backend | Spring Boot 3, Spring Security, Spring Data JPA |
 | Base de datos | PostgreSQL 16 |
 | Autenticación | JSON Web Tokens (JWT / HMAC-SHA256) |
-| Cifrado de contraseñas | PBKDF2WithHmacSHA256, 210 000 iteraciones, salt de 16 bytes |
+| Cifrado de contraseñas | PBKDF2WithHmacSHA256, 600 000 iteraciones, salt de 16 bytes |
 | Contenedores | Docker / Docker Compose |
 
 ### Diagrama C4 — Nivel 1: Contexto del sistema
@@ -85,7 +85,7 @@ C4Component
         Component(authService, "AuthService", "Service", "Logica de login y registro.")
         Component(userService, "UserService", "Service", "Consulta ultimo login y gestiona cambio de contrasena.")
         Component(adminService, "AdminService", "Service", "Lista, elimina y limpia contrasenas de usuarios.")
-        Component(pwManager, "PasswordManager", "Crypto", "PBKDF2WithHmacSHA256. 210000 iter. salt 16 bytes. Comparacion en tiempo constante.")
+        Component(pwManager, "PasswordManager", "Crypto", "PBKDF2WithHmacSHA256. 600000 iter. salt 16 bytes. Comparacion en tiempo constante.")
         Component(pwPolicy, "PasswordPolicy", "Crypto", "Valida longitud 8-128 y complejidad: mayuscula, minuscula y digito.")
         Component(jwtService, "JwtService", "Security", "Genera y valida JWT firmados con HMAC-SHA256.")
         Component(jwtFilter, "JwtAuthFilter", "Security Filter", "Intercepta peticiones y valida el JWT.")
@@ -135,7 +135,7 @@ Se implementó PBKDF2 directamente con la JCA (Java Cryptography Architecture) s
 private static final String ALGORITHM  = "PBKDF2WithHmacSHA256";
 private static final int    SALT_LENGTH = 16;    // bytes
 private static final int    KEY_LENGTH  = 256;   // bits
-public  static final int    ITERATIONS  = 210_000;
+public  static final int    ITERATIONS  = 600_000;
 ```
 
 Consideraciones de seguridad aplicadas:
@@ -300,7 +300,7 @@ Al ejecutar el frontend y el backend en contenedores separados, el navegador blo
 
 ## Conclusiones
 
-- **PBKDF2 es una opción sólida y estándar** para el almacenamiento de contraseñas. Su factor de trabajo ajustable (número de iteraciones) permite adaptarlo al hardware disponible; 210 000 iteraciones con HMAC-SHA256 sigue siendo la recomendación de OWASP en 2024 y hace que los ataques de fuerza bruta sean computacionalmente costosos.
+- **PBKDF2 es una opción sólida y estándar** para el almacenamiento de contraseñas. Su factor de trabajo ajustable (número de iteraciones) permite adaptarlo al hardware disponible; 600 000 iteraciones con HMAC-SHA256 sigue siendo la recomendación de OWASP en 2024 y hace que los ataques de fuerza bruta sean computacionalmente costosos.
 
 - **El salt aleatorio por usuario es indispensable**: garantiza que dos usuarios con la misma contraseña produzcan hashes completamente distintos, inutilizando las tablas rainbow y los ataques de diccionario precalculados.
 

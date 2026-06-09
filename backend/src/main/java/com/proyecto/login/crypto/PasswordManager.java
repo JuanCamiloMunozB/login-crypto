@@ -20,7 +20,7 @@ public class PasswordManager {
     private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
     private static final int SALT_LENGTH = 16;    // bytes
     private static final int KEY_LENGTH = 256;    // bits
-    public static final int ITERATIONS = 210_000; // OWASP recommended work factor
+    public static final int ITERATIONS = 600_000; // OWASP recommended work factor
 
     private final SecureRandom random = new SecureRandom();
 

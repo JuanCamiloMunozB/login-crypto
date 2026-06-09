@@ -319,7 +319,7 @@ export default function AdminPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { label: 'Algoritmo', value: 'PBKDF2' },
-              { label: 'Iteraciones', value: '210,000' },
+              { label: 'Iteraciones', value: '600,000' },
               { label: 'Autenticación', value: 'JWT' },
               { label: 'Salt', value: '16 bytes' },
             ].map(item => (
