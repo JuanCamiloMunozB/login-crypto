@@ -9,7 +9,6 @@ FROM node:20-alpine AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ENV NEXT_PUBLIC_API_URL=http://localhost:8080
 RUN npm run build
 
 # Stage 3: lightweight production image
