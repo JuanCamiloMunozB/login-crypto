@@ -1,6 +1,20 @@
 # login-crypto
 
-# Copiar el archivo de ejemplo de variables de entorno
+Sistema de gestión de credenciales seguro con autenticación PBKDF2 + JWT y roles de usuario (administrador y usuario común).
+
+## 📋 Informe del proyecto
+
+Consulta el **[INFORME.md](./INFORME.md)** para una documentación completa que incluye:
+
+- ✅ Manera cómo se hizo el programa (arquitectura, tecnologías, componentes)
+- ✅ Diagramas C4 (contexto, contenedores, componentes)
+- ✅ Pantallazos de la aplicación funcionando
+- ✅ Dificultades encontradas y cómo se resolvieron
+- ✅ Conclusiones sobre seguridad y buenas prácticas
+
+---
+
+## Copiar el archivo de ejemplo de variables de entorno
 ```bash
 cp .env.example .env
 ```
