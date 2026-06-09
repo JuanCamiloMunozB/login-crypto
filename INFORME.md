@@ -40,102 +40,73 @@ Las contraseñas se almacenan en una base de datos PostgreSQL usando el algoritm
 
 ```mermaid
 C4Context
-    title Contexto — Sistema de Gestión de Credenciales
+    title Contexto del sistema de gestion de credenciales
 
-    Person(admin, "Administrador", "Usuario único con rol ADMIN.<br/>Gestiona cuentas del sistema.")
-    Person(user, "Usuario común", "Usuario con rol USER.<br/>Consulta su sesión y cambia contraseña.")
+    Person(admin, "Administrador", "Usuario unico con rol ADMIN. Gestiona cuentas del sistema.")
+    Person(user, "Usuario comun", "Usuario con rol USER. Consulta su sesion y cambia contrasena.")
 
-    System(secureauth, "SecureAuth", "Sistema web de gestión de credenciales.<br/>Autentica usuarios con PBKDF2 + salt y sesiones JWT.")
+    System(secureauth, "SecureAuth", "Sistema web de gestion de credenciales. Autentica con PBKDF2 y JWT.")
 
-    Rel(admin, secureauth, "Administra usuarios", "Navegador web / HTTPS")
-    Rel(user, secureauth, "Inicia sesión y gestiona su cuenta", "Navegador web / HTTPS")
+    Rel(admin, secureauth, "Administra usuarios", "Navegador / HTTPS")
+    Rel(user, secureauth, "Inicia sesion y gestiona su cuenta", "Navegador / HTTPS")
 ```
 
 ### Diagrama C4 — Nivel 2: Contenedores
 
 ```mermaid
 C4Container
-    title Contenedores — Sistema de Gestión de Credenciales
+    title Contenedores del sistema de gestion de credenciales
 
     Person(admin, "Administrador")
-    Person(user, "Usuario común")
+    Person(user, "Usuario comun")
 
     System_Boundary(sb, "SecureAuth") {
-        Container(frontend, "Frontend", "Next.js 16 · TypeScript · Tailwind CSS",
-            "Interfaz web SPA.<br/>Gestiona la sesión JWT en localStorage.<br/>Protege rutas por rol en el cliente.")
-
-        Container(backend, "Backend API", "Spring Boot 3 · Java 17 · Spring Security",
-            "API REST stateless.<br/>Valida JWT, aplica política de contraseñas,<br/>deriva hashes con PBKDF2WithHmacSHA256.")
-
-        ContainerDb(db, "Base de datos", "PostgreSQL 16",
-            "Almacena usuarios, hash PBKDF2 (Base64),<br/>salt aleatorio (16 bytes), iteraciones<br/>y timestamps de inicio de sesión.")
+        Container(frontend, "Frontend", "Next.js 16 / TypeScript / Tailwind", "SPA web. Gestiona sesion JWT en localStorage. Protege rutas por rol.")
+        Container(backend, "Backend API", "Spring Boot 3 / Java 17 / Spring Security", "API REST stateless. Valida JWT y hashea contrasenas con PBKDF2.")
+        ContainerDb(db, "Base de datos", "PostgreSQL 16", "Almacena usuarios, hash PBKDF2, salt, iteraciones y timestamps de login.")
     }
 
-    Rel(admin, frontend, "Usa", "HTTPS · Navegador")
-    Rel(user, frontend, "Usa", "HTTPS · Navegador")
-    Rel(frontend, backend, "Peticiones REST", "HTTP/JSON · Authorization: Bearer JWT")
-    Rel(backend, db, "Lee y escribe", "JDBC / Spring Data JPA")
+    Rel(admin, frontend, "Usa", "HTTPS")
+    Rel(user, frontend, "Usa", "HTTPS")
+    Rel(frontend, backend, "Peticiones REST", "HTTP/JSON Bearer JWT")
+    Rel(backend, db, "Lee y escribe", "JDBC / JPA")
 ```
 
 ### Diagrama C4 — Nivel 3: Componentes del Backend
 
 ```mermaid
 C4Component
-    title Componentes — Backend (Spring Boot)
+    title Componentes del Backend (Spring Boot)
 
     Container_Boundary(backend, "Backend API") {
-        Component(authCtrl, "AuthController", "REST Controller",
-            "Expone /api/auth/login y /api/auth/register.<br/>Rutas públicas (sin autenticación).")
-
-        Component(userCtrl, "UserController", "REST Controller",
-            "Expone /api/user/me/last-login y<br/>/api/user/me/password.<br/>Requiere rol USER.")
-
-        Component(adminCtrl, "AdminController", "REST Controller",
-            "Expone /api/admin/users.<br/>Requiere rol ADMIN.")
-
-        Component(authService, "AuthService", "Service",
-            "Lógica de login y registro.<br/>Coordina PasswordPolicy, PasswordManager y JwtService.")
-
-        Component(userService, "UserService", "Service",
-            "Consulta último login.<br/>Gestiona cambio de contraseña.")
-
-        Component(adminService, "AdminService", "Service",
-            "Lista, elimina y limpia contraseñas de usuarios.")
-
-        Component(pwManager, "PasswordManager", "Crypto Component",
-            "Deriva hashes con PBKDF2WithHmacSHA256.<br/>210 000 iteraciones · salt 16 bytes · clave 256 bits.<br/>Comparación en tiempo constante.")
-
-        Component(pwPolicy, "PasswordPolicy", "Crypto Component",
-            "Valida longitud (8-128) y complejidad<br/>(mayúscula + minúscula + dígito).")
-
-        Component(jwtService, "JwtService", "Security Component",
-            "Genera y valida JWT firmados con HMAC-SHA256.")
-
-        Component(jwtFilter, "JwtAuthFilter", "Security Filter",
-            "Intercepta cada petición y valida el JWT.<br/>Inyecta el usuario en el SecurityContext.")
-
-        Component(secConfig, "SecurityConfig", "Configuration",
-            "Define reglas de autorización por ruta y rol.<br/>Configura CORS con orígenes desde variables de entorno.")
-
-        Component(dataInit, "DataInitializer", "Bootstrap Component",
-            "Crea el usuario administrador en el primer arranque.")
+        Component(authCtrl, "AuthController", "REST Controller", "Endpoints publicos: login y register.")
+        Component(userCtrl, "UserController", "REST Controller", "Endpoints de usuario: ultimo login y cambio de contrasena.")
+        Component(adminCtrl, "AdminController", "REST Controller", "Endpoints de admin: listar, eliminar y limpiar contrasenas.")
+        Component(authService, "AuthService", "Service", "Logica de login y registro.")
+        Component(userService, "UserService", "Service", "Consulta ultimo login y gestiona cambio de contrasena.")
+        Component(adminService, "AdminService", "Service", "Lista, elimina y limpia contrasenas de usuarios.")
+        Component(pwManager, "PasswordManager", "Crypto", "PBKDF2WithHmacSHA256. 210000 iter. salt 16 bytes. Comparacion en tiempo constante.")
+        Component(pwPolicy, "PasswordPolicy", "Crypto", "Valida longitud 8-128 y complejidad: mayuscula, minuscula y digito.")
+        Component(jwtService, "JwtService", "Security", "Genera y valida JWT firmados con HMAC-SHA256.")
+        Component(jwtFilter, "JwtAuthFilter", "Security Filter", "Intercepta peticiones y valida el JWT.")
+        Component(dataInit, "DataInitializer", "Bootstrap", "Crea el administrador en el primer arranque.")
     }
 
     ContainerDb(db, "PostgreSQL", "Base de datos")
 
-    Rel(authCtrl, authService, "Delega lógica de negocio")
-    Rel(userCtrl, userService, "Delega lógica de negocio")
-    Rel(adminCtrl, adminService, "Delega lógica de negocio")
-    Rel(authService, pwPolicy, "Valida contraseña")
-    Rel(authService, pwManager, "Hashea / verifica contraseña")
+    Rel(authCtrl, authService, "Delega")
+    Rel(userCtrl, userService, "Delega")
+    Rel(adminCtrl, adminService, "Delega")
+    Rel(authService, pwPolicy, "Valida contrasena")
+    Rel(authService, pwManager, "Hashea y verifica")
     Rel(authService, jwtService, "Genera JWT")
-    Rel(userService, pwPolicy, "Valida nueva contraseña")
-    Rel(userService, pwManager, "Hashea nueva contraseña")
+    Rel(userService, pwPolicy, "Valida nueva contrasena")
+    Rel(userService, pwManager, "Hashea nueva contrasena")
     Rel(jwtFilter, jwtService, "Valida token")
-    Rel(dataInit, pwManager, "Hashea contraseña inicial del admin")
-    Rel(authService, db, "Consulta y persiste usuarios", "JPA")
-    Rel(userService, db, "Consulta y actualiza usuario", "JPA")
-    Rel(adminService, db, "Consulta, elimina y actualiza usuarios", "JPA")
+    Rel(dataInit, pwManager, "Hashea contrasena inicial")
+    Rel(authService, db, "Persiste usuarios", "JPA")
+    Rel(userService, db, "Actualiza usuario", "JPA")
+    Rel(adminService, db, "Gestiona usuarios", "JPA")
 ```
 
 ---
