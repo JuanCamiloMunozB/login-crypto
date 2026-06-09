@@ -41,10 +41,6 @@ public class User {
     /** Timestamp of the current session — promoted to lastLogin on the next login. */
     private LocalDateTime currentLogin;
 
-    /** When true the account must set a new password before normal access. */
-    @Builder.Default
-    private boolean requiresPasswordChange = false;
-
     /**
      * Assigns a freshly derived credential and clears the password-change requirement.
      * Keeps credential mutation in the domain model and out of the service/crypto layers.
@@ -53,7 +49,6 @@ public class User {
         this.passwordHash = passwordHash;
         this.salt = salt;
         this.iterations = iterations;
-        this.requiresPasswordChange = false;
     }
 
     /** Removes the stored credential, forcing the account to set a new password. */
@@ -61,6 +56,5 @@ public class User {
         this.passwordHash = null;
         this.salt = null;
         this.iterations = null;
-        this.requiresPasswordChange = true;
     }
 }

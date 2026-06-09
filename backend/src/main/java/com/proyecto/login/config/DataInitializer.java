@@ -31,7 +31,6 @@ public class DataInitializer implements CommandLineRunner {
                     .role(Role.ADMIN)
                     .build();
             admin.assignCredentials(credential.hash(), credential.salt(), credential.iterations());
-            admin.setRequiresPasswordChange(true); // force rotation of the seeded default password
 
             userRepository.save(admin);
             System.out.println(">> Initial admin account created: " + adminUsername);

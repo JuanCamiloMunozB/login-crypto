@@ -46,7 +46,7 @@ public class PasswordManager {
      * Derives the password hash using PBKDF2.
      * Uses char[] instead of String so the password can be zeroed from memory after use.
      */
-    public String hashPassword(char[] password, String saltBase64, int iterations) {
+    private String hashPassword(char[] password, String saltBase64, int iterations) {
         byte[] salt = Base64.getDecoder().decode(saltBase64);
         PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, KEY_LENGTH);
         try {

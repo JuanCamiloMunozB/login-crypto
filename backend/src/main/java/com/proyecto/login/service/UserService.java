@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +23,20 @@ public class UserService {
 
     /** Returns the previous successful login timestamp (may be null for a first login). */
     public LocalDateTime getLastLogin(String username) {
-        return userRepository.findByUsername(username)
+        LocalDateTime lastLogin = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"))
                 .getLastLogin();
+
+        if (lastLogin == null) {
+            return null; 
+        }
+
+        ZoneId zoneDB = ZoneId.of("UTC");
+        ZoneId zoneCO = ZoneId.of("America/Bogota");
+
+        return lastLogin.atZone(zoneDB)
+                .withZoneSameInstant(zoneCO)
+                .toLocalDateTime();
     }
 
     /** Changes the password: generates a new salt and derives a new hash. */
